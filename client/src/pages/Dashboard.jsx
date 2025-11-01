@@ -110,13 +110,6 @@ export default function Dashboard() {
                         </h1>
                         <p className="text-gray-600 text-lg">Bagaimana perasaanmu hari ini?</p>
                     </div>
-                    <div className="flex items-center gap-3">
-                        <div className="text-center p-3 bg-orange-50 rounded-lg">
-                            <Calendar size={24} className="text-orange-500 mb-1" />
-                            <div className="font-bold text-orange-600">{userStreak} Hari</div>
-                            <div className="text-xs text-gray-600">Streak</div>
-                        </div>
-                    </div>
                 </div>
             </div>
 

@@ -227,13 +227,15 @@ const HistoryJelajah = () => {
                         </div>
 
                         {detail.recommendation ? (
-                            <div className="bg-gradient-to-r from-primary-50 to-purple-50 rounded-2xl p-4 mb-5 border border-primary-100">
-                                <p className="text-xs text-slate-500 mb-1">Latihan yang cocok buat kamu:</p>
-                                <h3 className="text-base font-semibold text-slate-900">{detail.recommendation.title}</h3>
-                                {detail.recommendation.slug ? (
-                                    <p className="text-[11px] text-slate-400 mt-1">#{detail.recommendation.slug}</p>
-                                ) : null}
-                            </div>
+                            <Link to={`/latihan/${detail.recommendation.id}`}>
+                                <div className="bg-gradient-to-r from-primary-50 to-purple-50 rounded-2xl p-4 mb-5 border border-primary-100">
+                                    <p className="text-xs text-slate-500 mb-1">Latihan yang cocok buat kamu:</p>
+                                    <h3 className="text-base font-semibold text-slate-900">{detail.recommendation.title}</h3>
+                                    {detail.recommendation.slug ? (
+                                        <p className="text-[11px] text-slate-400 mt-1">#{detail.recommendation.slug}</p>
+                                    ) : null}
+                                </div>
+                            </Link>
                         ) : null}
 
                         {detail.answers?.length ? (
