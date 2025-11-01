@@ -189,6 +189,13 @@ export default function ExerciseDetail() {
                                         ) : (
                                             <div>
                                                 {selectedModule?.content ? <p>{selectedModule.content}</p> : <p>Tidak ada konten modul.</p>}
+                                                {selectedModule?.audioUrl && (
+                                                    <div className="mt-4">
+                                                      <audio controls className="w-full" src={selectedModule.audioUrl}>
+                                                        Your browser does not support the audio element.
+                                                      </audio>
+                                                    </div>
+                                                  )}
                                             </div>
                                         )}
                                     </div>
