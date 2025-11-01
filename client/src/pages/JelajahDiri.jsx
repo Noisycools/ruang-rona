@@ -1,14 +1,14 @@
 // src/pages/JelajahDiri.jsx
-import React, { useEffect, useState } from 'react';
-import { getAssessmentQuestions, submitAssessment, getAssessmentResult } from '../api/assessments';
+import React, {useEffect, useState} from 'react';
+import {getAssessmentQuestions, submitAssessment, getAssessmentResult} from '../api/assessments';
 import useAuthStore from '../store/authStore';
-import { Button } from 'primereact/button';
-import { Tag } from 'primereact/tag';
-import { Link } from 'react-router-dom';
+import {Button} from 'primereact/button';
+import {Tag} from 'primereact/tag';
+import {Link} from 'react-router-dom';
 
 const JelajahDiri = () => {
     const token = useAuthStore((state) => state.token);
-    const { user } = useAuthStore();
+    const {user} = useAuthStore();
     const [loading, setLoading] = useState(true);
     const [questions, setQuestions] = useState([]);
     const [step, setStep] = useState(0);
@@ -90,7 +90,8 @@ const JelajahDiri = () => {
     // LOADING
     if (loading) {
         return (
-            <div className="min-h-[70vh] flex items-center justify-center bg-[radial-gradient(circle_at_top,_#eef2ff,_#e2e8f0_50%,_#f8fafc_80%)]">
+            <div
+                className="min-h-[70vh] flex items-center justify-center bg-[radial-gradient(circle_at_top,_#eef2ff,_#e2e8f0_50%,_#f8fafc_80%)]">
                 <p className="text-slate-500 animate-pulse">Memuat pertanyaan...</p>
             </div>
         );
@@ -104,21 +105,21 @@ const JelajahDiri = () => {
         return (
             <div className="min-h-[70vh] bg-slate-100">
                 <nav className="max-w-6xl mx-auto px-6 text-sm mt-10">
-                    <ol className="flex items-center space-x-2 text-slate-500">
+                    <ol className="flex items-center space-x-2 text-slate-500 gap-3 list-none">
                         <li>
-                        <Link
-                            to="/dashboard"
-                            className="hover:text-primary-600 transition-colors flex items-center gap-1"
-                        >
-                            <i className="pi pi-home text-xs" />
-                            <span className="font-medium">Dashboard</span>
-                        </Link>
+                            <Link
+                                to="/dashboard"
+                                className="hover:text-primary-600 transition-colors flex items-center gap-1 no-underline"
+                            >
+                                <i className="pi pi-home text-xs"/>
+                                <span className="font-medium">Dashboard</span>
+                            </Link>
                         </li>
                         <li className="text-slate-400">›</li>
                         <li>
                             <Link
                                 to="/jelajah-diri"
-                                className="hover:text-primary-600 transition-colors flex items-center gap-1"
+                                className="hover:text-primary-600 transition-colors flex items-center gap-1 no-underline"
                             >
                                 <span className="font-medium">Jelajah Diri</span>
                             </Link>
@@ -130,7 +131,8 @@ const JelajahDiri = () => {
                     </ol>
                 </nav>
                 <div className="min-h-[70vh] flex items-center justify-center">
-                    <div className="w-full max-w-2xl bg-white/90 rounded-3xl shadow-xl p-8 border border-white/40 backdrop-blur my-10">
+                    <div
+                        className="w-full max-w-2xl bg-white/90 rounded-3xl shadow-xl p-8 border border-white/40 backdrop-blur my-10">
                         <h2 className="text-2xl font-semibold mb-2 text-slate-900">Hasil Jelajah Diri ✨</h2>
                         <p className="text-slate-500 mb-4 text-sm">
                             Kita coba rangkumin hal yang lagi kamu rasain.
@@ -138,18 +140,21 @@ const JelajahDiri = () => {
 
                         <div className="mb-5">
                             <p className="text-xs text-slate-500 mb-1">Area yang lagi berat:</p>
-                            <Tag value={area} rounded className="bg-primary-100 text-primary-700 px-3 py-2 capitalize text-sm" />
+                            <Tag value={area} rounded
+                                 className="bg-primary-100 text-primary-700 px-3 py-2 capitalize text-sm"/>
                         </div>
 
                         {rec ? (
-                            <div className="bg-gradient-to-r from-primary-50 to-purple-50 rounded-2xl p-4 mb-5 border border-primary-100">
+                            <div
+                                className="bg-gradient-to-r from-primary-50 to-purple-50 rounded-2xl p-4 mb-5 border border-primary-100">
                                 <p className="text-xs text-slate-500 mb-1">Latihan yang cocok buat kamu:</p>
                                 <h3 className="text-base font-semibold text-slate-900">{rec.title}</h3>
                                 {rec.slug ? <p className="text-[11px] text-slate-400 mt-1">#{rec.slug}</p> : null}
                             </div>
                         ) : (
                             <p className="text-slate-500 mb-5">
-                                Belum ada latihan spesifik, tapi kamu bisa mulai dari napas 4-7-8 atau journaling 5 menit.
+                                Belum ada latihan spesifik, tapi kamu bisa mulai dari napas 4-7-8 atau journaling 5
+                                menit.
                             </p>
                         )}
 
@@ -168,6 +173,7 @@ const JelajahDiri = () => {
                         ) : null}
 
                         <Button
+                            severity="info"
                             label="Jelajah lagi"
                             onClick={() => {
                                 setResult(null);
@@ -198,23 +204,24 @@ const JelajahDiri = () => {
 
     return (
         <>
-            <div className="min-h-[70vh] bg-[radial-gradient(circle_at_top,_#eef2ff,_#e2e8f0_50%,_#f8fafc_80%)] py-10 px-4">
+            <div
+                className="min-h-[70vh] bg-[radial-gradient(circle_at_top,_#eef2ff,_#e2e8f0_50%,_#f8fafc_80%)] py-10 px-4">
                 <nav className="max-w-6xl mx-auto px-6 text-sm">
-                    <ol className="flex items-center space-x-2 text-slate-500">
+                    <ol className="flex items-center space-x-2 text-slate-500 gap-3 list-none">
                         <li>
-                        <Link
-                            to="/dashboard"
-                            className="hover:text-primary-600 transition-colors flex items-center gap-1"
-                        >
-                            <i className="pi pi-home text-xs" />
-                            <span className="font-medium">Dashboard</span>
-                        </Link>
+                            <Link
+                                to="/dashboard"
+                                className="hover:text-primary-600 transition-colors flex items-center gap-1 no-underline"
+                            >
+                                <i className="pi pi-home text-xs"/>
+                                <span className="font-medium">Dashboard</span>
+                            </Link>
                         </li>
                         <li className="text-slate-400">›</li>
                         <li>
                             <Link
                                 to="/jelajah-diri"
-                                className="hover:text-primary-600 transition-colors flex items-center gap-1"
+                                className="hover:text-primary-600 transition-colors flex items-center gap-1 no-underline"
                             >
                                 <span className="font-medium">Jelajah Diri</span>
                             </Link>
@@ -226,7 +233,8 @@ const JelajahDiri = () => {
                     </ol>
                 </nav>
                 <div className="min-h-[70vh] flex items-center justify-center">
-                    <div className="w-full max-w-3xl bg-white/90 rounded-3xl shadow-xl p-8 border border-white/40 backdrop-blur">
+                    <div
+                        className="w-full max-w-3xl bg-white/90 rounded-3xl shadow-xl p-8 border border-white/40 backdrop-blur">
                         {/* top bar */}
                         <div className="flex items-center justify-between mb-6 gap-6">
                             <div>
@@ -238,12 +246,11 @@ const JelajahDiri = () => {
                                 <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
                                     <div
                                         className="h-3 bg-gradient-to-r from-primary-500 via-sky-400 to-emerald-400 rounded-full transition-all duration-300"
-                                        style={{ width: `${percent}%` }}
+                                        style={{width: `${percent}%`}}
                                     />
                                 </div>
                                 <p className="text-[10px] text-right text-slate-400 mt-1">{percent}%</p>
                             </div>
-
                         </div>
 
                         {/* question */}
@@ -256,7 +263,7 @@ const JelajahDiri = () => {
                             {(q.options || []).map((opt) => {
                                 const active = answers[q.id] === opt;
                                 return (
-                                    <button
+                                    <Button
                                         key={opt}
                                         onClick={() => handleSelectAnswer(q.id, opt)}
                                         className={[
@@ -267,51 +274,55 @@ const JelajahDiri = () => {
                                                 : 'bg-white/60 border border-slate-100 text-slate-700 hover:bg-white',
                                         ].join(' ')}
                                     >
-                                        <span className="font-medium">{opt.charAt(0).toUpperCase() + opt.slice(1)}</span>
-                                    </button>
+                                        <span
+                                            className="font-medium">{opt.charAt(0).toUpperCase() + opt.slice(1)}</span>
+                                    </Button>
                                 );
                             })}
                         </div>
-
 
 
                         {error ? <p className="text-sm text-rose-500 mb-4">{error}</p> : null}
 
                         {/* actions */}
                         <div className="flex items-center justify-between">
-                            <button
+                            <Button
+                                severity="secondary"
                                 onClick={handlePrev}
                                 disabled={step === 0}
                                 className={
                                     step === 0
                                         ? 'text-slate-300 font-semibold cursor-not-allowed'
-                                        : 'text-slate-500 font-semibold hover:text-slate-700 transition'
+                                        : 'text-slate-300 font-semibold hover:text-white transition'
                                 }
                             >
                                 Kembali
-                            </button>
+                            </Button>
 
                             {!isLast ? (
-                                <button
+                                <Button
+                                    severity="info"
                                     onClick={handleNext}
                                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-500 text-white font-semibold shadow-md hover:bg-primary-600 active:scale-[.99] transition"
                                 >
                                     Lanjut
-                                    <span className="inline-block bg-white/30 rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                                    <span
+                                        className="inline-block bg-white/30 rounded-full w-5 h-5 flex items-center justify-center text-xs">
                                         →
                                     </span>
-                                </button>
+                                </Button>
                             ) : (
-                                <button
+                                <Button
+                                    severity="success"
                                     onClick={handleSubmit}
                                     disabled={submitting}
                                     className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold shadow-md transition ${submitting
                                         ? 'bg-slate-300 text-slate-500 cursor-wait'
                                         : 'bg-emerald-500 text-white hover:bg-emerald-600'
-                                        }`}
+                                    }`}
                                 >
                                     {submitting ? 'Mengirim...' : 'Lihat hasil'}
-                                </button>
+                                </Button>
                             )}
                         </div>
 

@@ -86,11 +86,11 @@ const HistoryJelajah = () => {
     return (
         <>
             <nav className="max-w-6xl mx-auto px-6 mt-10 text-sm">
-                <ol className="flex items-center space-x-2 text-slate-500">
+                <ol className="flex gap-3 items-center space-x-2 text-slate-500 list-none">
                     <li>
                         <Link
                             to="/dashboard"
-                            className="hover:text-primary-600 transition-colors flex items-center gap-1"
+                            className="hover:text-primary-600 transition-colors flex items-center gap-1 no-underline"
                         >
                             <i className="pi pi-home text-xs" />
                             <span className="font-medium">Dashboard</span>
