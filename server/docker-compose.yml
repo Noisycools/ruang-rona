@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Layanan untuk server Node.js Anda
+  server:
+    build: . # Membangun image dari Dockerfile di direktori ini
+    ports:
+      - "5000:5000" # Memetakan port 5000 di kontainer ke port 5000 di komputer Anda
+    environment:
+      # Gunakan nama service 'db' sebagai host database
+      DATABASE_URL: "mysql://root:password_rahasia@db:3306/ruang_rona_db"
+      JWT_SECRET: "kunci_rahasia_yang_sangat_aman_dan_panjang"
+      PORT: 5000
+      CLIENT_URL: "http://localhost:3000"
+    depends_on:
+      - db # Pastikan service 'db' berjalan sebelum 'server' dimulai
+
+  # Layanan untuk server database MySQL
+  db:
+    image: mysql:8.0 # Menggunakan image resmi MySQL versi 8.0
+    container_name: ruang_rona_mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "password_rahasia" # Ganti dengan password yang kuat
+      MYSQL_DATABASE: "ruang_rona_db" # Nama database yang akan dibuat otomatis
+    ports:
+      - "3306:3306" # Memetakan port 3306 di kontainer ke komputer Anda (untuk Navicat)
+    volumes:
+      - mysql_data:/var/lib/mysql # Menyimpan data database secara persisten
+
+volumes:
+  mysql_data:
