@@ -3,6 +3,7 @@ import { Brain, Heart, Users, BookOpen, Smartphone, Sparkles, Clock, Trophy, Che
 import { exerciseAPI } from '../api/axios.js';
 import useAuthStore from '../store/authStore'; // get real user when available
 import { useNavigate } from 'react-router-dom';
+// this is changes
 
 const ExerciseLibrary = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');

@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Clock, ChevronRight, X } from 'lucide-react';
 import { exerciseAPI } from '../api/axios.js';
 import useAuthStore from '../store/authStore';
-import { Button } from 'primereact/button';
+
 
 export default function ExerciseDetail() {
   const { id } = useParams();
