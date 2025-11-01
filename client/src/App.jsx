@@ -12,6 +12,7 @@ import JelajahDiri from './pages/JelajahDiri';
 import Exercises from './pages/Exercises';
 import DindingCerita from './pages/DindingCerita';
 import PusatBantuan from './pages/PusatBantuan';
+import ExerciseDetail from './pages/ExerciseDetail';
 
 // Layout
 import Navbar from './components/layout/Navbar';
@@ -73,9 +74,9 @@ function App() {
                         <Route
                             path="/jelajah-diri"
                             element={
-                                <PublicRoute>
+                                <ProtectedRoute>
                                     <JelajahDiri />
-                                </PublicRoute>
+                                </ProtectedRoute>
                             }
                         />
                         <Route
@@ -94,10 +95,10 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route path="pusat-bantuan" element={
                             <PusatBantuan />
                         } />
+                        <Route path="/latihan/:id" element={<ExerciseDetail />} />
 
                         {/* 404 */}
                         <Route path="*" element={<Navigate to="/" />} />
