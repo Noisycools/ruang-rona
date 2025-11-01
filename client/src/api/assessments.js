@@ -15,14 +15,14 @@ export async function getAssessmentQuestions(token) {
   return data.data || [];
 }
 
-export async function submitAssessment(token, answers) {
+export async function submitAssessment(token, answers, userId) {
   const res = await fetch(`${API_BASE}/assessments`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify({ userId: '9082072b-2eee-4423-86f1-cc403418a921', answers })
+    body: JSON.stringify({ userId, answers })
   });
 
   if (!res.ok) {
@@ -44,4 +44,17 @@ export async function getAssessmentResult(token, sessionId) {
   }
 
   return res.json(); 
+}
+
+export async function getAssessmentHistory(token) {
+  const res = await fetch(`${API_BASE}/assessments/history`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  if (!res.ok) {
+    throw new Error('Gagal ambil history');
+  }
+  const data = await res.json();
+  return data.data || [];
 }

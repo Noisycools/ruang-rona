@@ -77,21 +77,22 @@ model QuestionChoice {
 
 // Model untuk Progress Latihan
 model ExerciseProgress {
-  id            String    @id @default(uuid())
-  userId        String
-  exerciseType  String // "breathing", "cognitive_restructuring", dll
-  exerciseTitle String
-  completed     Boolean   @default(false)
-  completedAt   DateTime?
-  notes         String?   @db.Text
-  streak        Int       @default(0)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
+  id              String   @id @default(uuid())
+  userId          String
+  exerciseType    String   // "breathing", "cognitive_restructuring", dll
+  exerciseTitle   String
+  completed       Boolean  @default(false)
+  completedAt     DateTime?
+  notes           String?  @db.Text
+  streak          Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  
   @@index([userId])
   @@index([exerciseType])
+  @@index([exerciseRecommendationId])
   @@map("exercise_progress")
 }
 
@@ -227,8 +228,27 @@ model ExerciseRecommendation {
   code      String   @unique // "akademik","sosial","keluarga","diri"
   title     String
   slug      String
-  content   String?
+  content   String?    // daftar module id yang direkomendasikan
   createdAt DateTime @default(now())
+
+  modules   Module[]  // relation back to Module
+  progress  ExerciseProgress[]
+
+  @@map("exercise_recommendations")
+}
+
+model Module {
+  id                      Int      @id @default(autoincrement())
+  exerciseRecommendationId Int
+  title                   String
+  slug                    String   @unique
+  content                 String   @db.Text
+  createdAt               DateTime @default(now())
+
+  exerciseRecommendation  ExerciseRecommendation @relation(fields: [exerciseRecommendationId], references: [id], onDelete: Cascade)
+
+  @@index([exerciseRecommendationId])
+  @@map("modules")
 }
 
 // Model untuk Story Activity Logs

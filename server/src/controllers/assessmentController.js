@@ -111,6 +111,20 @@ exports.submitAssessment = async (req, res) => {
       });
     }
 
+    const rec = await prisma.exerciseRecommendation.findFirst({
+      where: { code: mainArea }
+    });
+
+    await prisma.exerciseProgress.create({
+      data: {
+        userId,
+        exerciseType: 'default',
+        exerciseTitle: rec ? rec.title : 'Latihan dari sistem',
+        exerciseRecommendationId: rec ? rec.id : null,
+      }
+    });
+
+
     return res.json({
       success: true,
       sessionId: session.id,
@@ -177,3 +191,52 @@ exports.getAssessmentResult = async (req, res) => {
   }
 };
 
+exports.getAssessmentHistory = async (req, res) => {
+  try {
+    const userId = req.user?.id || req.query.userId || req.body.userId;
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'User tidak ditemukan'
+      });
+    }
+
+    const sessions = await prisma.assessmentSession.findMany({
+      where: {
+        userId: String(userId)
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      include: {
+        answers: {
+          include: {
+            question: true
+          }
+        }
+      }
+    });
+
+    const data = sessions.map((s) => ({
+      id: s.id,
+      mainArea: s.mainArea,
+      createdAt: s.createdAt,
+      previewAnswers: s.answers.slice(0, 2).map((a) => ({
+        question: a.question?.question ?? '',
+        answer: a.answer
+      }))
+    }));
+
+    return res.json({
+      success: true,
+      data
+    });
+  } catch (err) {
+    console.error('getAssessmentHistory error:', err);
+    return res.status(500).json({
+      success: false,
+      message: 'Gagal mengambil riwayat assessment'
+    });
+  }
+};
