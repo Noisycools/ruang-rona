@@ -203,7 +203,7 @@ export default function Register() {
                                     <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
                                         Username <span className="text-red-500">*</span>
                                     </label>
-                                    <span className="flex gap-2 w-full">
+                                    <span className="flex items-center gap-2 w-full">
                                         <i className="pi pi-user"/>
                                         <InputText
                                             id="username"

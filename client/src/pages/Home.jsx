@@ -86,7 +86,7 @@ export default function Home() {
             </section>
 
             {/* Stats Section */}
-            <section className="py-8 bg-primary-500 text-primary-700">
+            <section className="py-8 bg-primary-500 text-white">
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                         {stats.map((stat, index) => (

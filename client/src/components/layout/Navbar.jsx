@@ -48,7 +48,7 @@ export default function Navbar() {
 
     // Logo/Brand
     const start = (
-        <Link to={isAuthenticated ? '/dashboard' : '/'} className="flex items-center gap-1 no-underline">
+        <Link to={isAuthenticated ? '/dashboard' : '/'} className="flex items-center gap-1 no-underline mr-3">
             <div className="p-2 border-round-lg">
                 <Brain size={28} color="#0369a1" strokeWidth={2}/>
             </div>
@@ -58,10 +58,10 @@ export default function Navbar() {
 
     // Right side content
     const end = (
-        <div className="flex align-items-center gap-2">
+        <div className="flex items-center gap-2">
             {isAuthenticated ? (
                 <>
-                    <div className="flex align-items-center gap-2 mr-3 p-2 bg-primary-50 border-round-lg">
+                    <div className="flex items-center gap-2 mr-3 p-2 bg-primary-50 border-round-lg">
                         <Avatar
                             label={user?.username?.charAt(0).toUpperCase()}
                             className="bg-primary-500 text-white"
