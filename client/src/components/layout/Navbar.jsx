@@ -1,16 +1,16 @@
 import React from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { Menubar } from 'primereact/menubar';
-import { Button } from 'primereact/button';
-import { Avatar } from 'primereact/avatar';
-import { Badge } from 'primereact/badge';
+import {useNavigate, Link, useLocation} from 'react-router-dom';
+import {Menubar} from 'primereact/menubar';
+import {Button} from 'primereact/button';
+import {Avatar} from 'primereact/avatar';
+import {Badge} from 'primereact/badge';
 import useAuthStore from '../../store/authStore';
-import { Brain } from 'lucide-react';
+import {Brain} from 'lucide-react';
 
 export default function Navbar() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { isAuthenticated, user, logout } = useAuthStore();
+    const {isAuthenticated, user, logout} = useAuthStore();
 
     const handleLogout = () => {
         logout();
@@ -50,7 +50,7 @@ export default function Navbar() {
     const start = (
         <Link to={isAuthenticated ? '/dashboard' : '/'} className="flex items-center gap-1 no-underline">
             <div className="p-2 border-round-lg">
-                <Brain size={28} color="#0369a1" strokeWidth={2} />
+                <Brain size={28} color="#0369a1" strokeWidth={2}/>
             </div>
             <span className="text-2xl font-bold text-primary-700">Ruang Rona</span>
         </Link>
@@ -99,14 +99,12 @@ export default function Navbar() {
     );
 
     return (
-        <div className="navbar-container">
-            <Menubar
-                model={isAuthenticated ? authenticatedItems : []}
-                start={start}
-                end={end}
-                className="border-none shadow-2 border-round-lg mx-3 my-3 px-3 py-1"
-                style={{ background: 'white' }}
-            />
-        </div>
+        <Menubar
+            model={isAuthenticated ? authenticatedItems : []}
+            start={start}
+            end={end}
+            className="border-none shadow-2 border-round-lg"
+            style={{background: 'white'}}
+        />
     );
 }
