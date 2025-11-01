@@ -22,16 +22,3 @@ html, body, #root {
 .p-password {
     width: 100%;
 }
-
-/* sembunyikan header bawaan prime di dialog riwayat */
-.rr-dialog .p-dialog-header {
-    display: none;
-  }
-  
-  /* hilangin padding bawaan content */
-  .rr-dialog-content.p-dialog-content {
-    padding: 0;
-    background: transparent;
-    border: 0;
-  }
-  

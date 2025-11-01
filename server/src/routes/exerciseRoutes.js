@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth');
+const ctrl = require('../controllers/exerciseController');
 
-// Nanti, Anda akan membuat controller untuk exercise
-// const exerciseController = require('../controllers/exerciseController');
+// Progress routes first to avoid conflict with :id
+router.get('/progress', ctrl.getProgress);
+router.post('/progress', ctrl.upsertProgress);
 
-// Contoh rute placeholder
-router.get('/', auth, (req, res) => {
-    res.json({ success: true, message: 'Endpoint untuk exercises.' });
-});
+// List and single item
+router.get('/', ctrl.listExercises);
+router.get('/:id', ctrl.getExerciseById);
 
 module.exports = router;

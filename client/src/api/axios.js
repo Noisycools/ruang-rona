@@ -54,7 +54,9 @@ export const assessmentAPI = {
 
 export const exerciseAPI = {
     getAll: () => api.get('/exercises'),
-    getProgress: () => api.get('/exercises/progress'),
+    getById: (id) => api.get(`/exercises/${id}`), // <--- added
+    // pass userId to fetch progress for a specific user
+    getProgress: (userId) => api.get('/exercises/progress', { params: { userId } }),
     updateProgress: (data) => api.post('/exercises/progress', data),
 };
 
