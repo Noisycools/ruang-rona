@@ -17,6 +17,7 @@ import ExerciseDetail from './pages/ExerciseDetail';
 // Layout
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import HistoryJelajah from './pages/HistoryJelajah';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -73,6 +74,14 @@ function App() {
                         />
                         <Route
                             path="/jelajah-diri"
+                            element={
+                                <ProtectedRoute>
+                                    <HistoryJelajah />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/jelajah-diri/test"
                             element={
                                 <ProtectedRoute>
                                     <JelajahDiri />

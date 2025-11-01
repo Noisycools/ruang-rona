@@ -74,21 +74,26 @@ model QuestionChoice {
 
 // Model untuk Progress Latihan
 model ExerciseProgress {
-  id              String   @id @default(uuid())
-  userId          String
-  exerciseType    String   // "breathing", "cognitive_restructuring", dll
-  exerciseTitle   String
-  completed       Boolean  @default(false)
-  completedAt     DateTime?
-  notes           String?  @db.Text
-  streak          Int      @default(0)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  
+  id                     String   @id @default(uuid())
+  userId                 String
+  exerciseType           String   // "breathing", "cognitive_restructuring", dll
+  exerciseTitle          String
+  completed              Boolean  @default(false)
+  completedAt            DateTime?
+  notes                  String?  @db.Text
+  streak                 Int      @default(0)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  exerciseRecommendationId Int?   // FK ke ExerciseRecommendation.id
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
+  exerciseRecommendation ExerciseRecommendation? @relation(fields: [exerciseRecommendationId], references: [id])
+
   @@index([userId])
   @@index([exerciseType])
+  @@index([exerciseRecommendationId])
   @@map("exercise_progress")
 }
 
@@ -188,6 +193,7 @@ model ExerciseRecommendation {
   createdAt DateTime @default(now())
 
   modules   Module[]  // relation back to Module
+  progress  ExerciseProgress[]
 
   @@map("exercise_recommendations")
 }
@@ -205,4 +211,3 @@ model Module {
   @@index([exerciseRecommendationId])
   @@map("modules")
 }
-

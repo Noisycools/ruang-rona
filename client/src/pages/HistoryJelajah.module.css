@@ -1,0 +1,13 @@
+/* src/pages/HistoryJelajah.module.css */
+
+.dialog :global(.p-dialog-header) {
+    display: none;
+  }
+  
+  .dialog :global(.p-dialog-content) {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  
