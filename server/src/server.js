@@ -10,7 +10,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: '*',
     credentials: true
 }));
 app.use(express.json());
@@ -33,7 +33,7 @@ const exerciseRoutes = require('./routes/exerciseRoutes');
 const storyRoutes = require('./routes/storyRoutes');
 
 app.use('/api/auth', authRoutes);
-// app.use('/api/assessments', assessmentRoutes);
+app.use('/api/assessments', assessmentRoutes);
 // app.use('/api/exercises', exerciseRoutes);
 // app.use('/api/stories', storyRoutes);
 

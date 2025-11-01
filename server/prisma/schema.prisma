@@ -42,6 +42,36 @@ model Assessment {
   @@map("assessments")
 }
 
+// Model untuk Pertanyaan Kuesioner
+model Question {
+  id        String   @id @default(uuid())
+  text      String   @db.Text
+  category  String   // "academic", "social", "family", "personal", "online"
+  order     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  choices   QuestionChoice[]
+  
+  @@unique([category, order])
+  @@map("questions")
+}
+
+// Model untuk Pilihan Jawaban Kuesioner
+model QuestionChoice {
+  id          String   @id @default(uuid())
+  questionId  String
+  text        String
+  value       Int      // Nilai/skor untuk jawaban ini
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  question  Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  
+  @@index([questionId])
+  @@map("question_choices")
+}
+
 // Model untuk Progress Latihan
 model ExerciseProgress {
   id              String   @id @default(uuid())
@@ -118,4 +148,43 @@ model EmergencyResource {
   
   @@index([type])
   @@map("emergency_resources")
+}
+
+model AssessmentQuestion {
+  id        Int      @id @default(autoincrement())
+  order     Int
+  question  String
+  type      String   // "single", "scale", "multi"
+  options   Json?    // ["akademik","sosial","keluarga","diri","lainnya"]
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  answers   AssessmentAnswer[]
+}
+
+model AssessmentSession {
+  id        Int               @id @default(autoincrement())
+  userId    Int               // dari auth
+  mainArea  String?
+  createdAt DateTime          @default(now())
+  answers   AssessmentAnswer[]
+}
+
+model AssessmentAnswer {
+  id          Int               @id @default(autoincrement())
+  sessionId   Int
+  questionId  Int
+  answer      Json
+  createdAt   DateTime          @default(now())
+  session     AssessmentSession @relation(fields: [sessionId], references: [id])
+  question    AssessmentQuestion @relation(fields: [questionId], references: [id])
+}
+
+model ExerciseRecommendation {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique   // "akademik","sosial","keluarga","diri"
+  title     String
+  slug      String
+  content   String?
+  createdAt DateTime @default(now())
 }

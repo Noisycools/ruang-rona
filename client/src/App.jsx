@@ -72,9 +72,9 @@ function App() {
                         <Route
                             path="/jelajah-diri"
                             element={
-                                <ProtectedRoute>
+                                <PublicRoute>
                                     <JelajahDiri />
-                                </ProtectedRoute>
+                                </PublicRoute>
                             }
                         />
                         <Route
