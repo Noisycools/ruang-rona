@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { PrismaClient } = require('@prisma/client');
+const path = require('path');
+const fs = require('fs');
 
 const prisma = new PrismaClient();
 const app = express();
@@ -16,6 +18,15 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// serve audio/static assets folder (place audio files in server/assets)
+const assetsDir = path.resolve(__dirname, '..', 'assets');
+if (!fs.existsSync(assetsDir)) {
+  console.warn(`[assets] folder not found at ${assetsDir} — create it and place audio files there (e.g. ${assetsDir}\\relaxation-1.mp3)`);
+} else {
+  console.log(`[assets] serving static files from ${assetsDir}`);
+}
+app.use('/assets', express.static(assetsDir));
 
 // Health check
 app.get('/api/health', (req, res) => {
