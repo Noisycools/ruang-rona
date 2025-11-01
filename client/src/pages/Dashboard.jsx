@@ -121,7 +121,7 @@ export default function Dashboard() {
             </div>
 
             {/* Progress Card */}
-            <Card className="mb-5 rounded-2xl p-6">
+            {/* <Card className="mb-5 rounded-2xl p-6">
                 <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
                         <TrendingUp size={24} className="text-blue-600" />
@@ -133,7 +133,7 @@ export default function Dashboard() {
                 <p className="text-gray-600 m-0">
                     Kamu sudah menyelesaikan {completedExercises} dari {totalExercises} latihan minggu ini. Pertahankan! 🎉
                 </p>
-            </Card>
+            </Card> */}
 
             <Card className="mb-5 rounded-2xl p-6">
                 <div className="flex items-center justify-between mb-3">
