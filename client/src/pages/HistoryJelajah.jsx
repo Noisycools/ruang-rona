@@ -11,14 +11,16 @@ import { Link } from 'react-router-dom';
 
 const areaColor = (area) => {
     switch ((area || '').toLowerCase()) {
-        case 'akademik':
-            return 'bg-indigo-100 text-indigo-700';
-        case 'sosial':
-            return 'bg-pink-100 text-pink-700';
-        case 'keluarga':
-            return 'bg-amber-100 text-amber-700';
-        case 'diri':
-            return 'bg-emerald-100 text-emerald-700';
+        case 'school':
+            return 'bg-indigo-100 text-indigo-700'; // Akademik
+        case 'friends':
+            return 'bg-pink-100 text-pink-700'; // Sosial / Pertemanan
+        case 'self':
+            return 'bg-emerald-100 text-emerald-700'; // Diri
+        case 'online':
+            return 'bg-sky-100 text-sky-700'; // Dunia online / media sosial
+        case 'mind':
+            return 'bg-amber-100 text-amber-700'; // Pikiran / mental / kecemasan
         default:
             return 'bg-slate-100 text-slate-600';
     }
