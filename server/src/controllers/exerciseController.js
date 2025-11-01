@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 
 async function listExercises(req, res) {
   try {
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
     const items = await prisma.exerciseRecommendation.findMany({
       orderBy: { createdAt: 'asc' },
       include: { modules: { orderBy: { id: 'asc' } } }
@@ -15,13 +16,18 @@ async function listExercises(req, res) {
       title: it.title,
       slug: it.slug,
       description: it.content || '',
-      // use code as category; client can map to labels
       category: it.code,
-      // placeholders for fields client may expect
       duration: 'varies',
       level: 'Pemula',
       points: 50,
-      modules: (it.modules || []).map(m => ({ id: m.id, title: m.title, slug: m.slug, content: m.content })),
+      modules: (it.modules || []).map(m => ({
+        id: m.id,
+        title: m.title,
+        slug: m.slug,
+        content: m.content,
+        audio: m.audio || null,
+        audioUrl: m.audio ? `${baseUrl}/assets/${m.audio}` : null
+      })),
       createdAt: it.createdAt
     }));
 
@@ -37,6 +43,7 @@ async function getExerciseById(req, res) {
     const id = parseInt(req.params.id, 10);
     if (Number.isNaN(id)) return res.status(400).json({ error: 'invalid id' });
 
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
     const it = await prisma.exerciseRecommendation.findUnique({
       where: { id },
       include: { modules: { orderBy: { id: 'asc' } } }
@@ -53,7 +60,14 @@ async function getExerciseById(req, res) {
       duration: 'varies',
       level: 'Pemula',
       points: 50,
-      modules: (it.modules || []).map(m => ({ id: m.id, title: m.title, slug: m.slug, content: m.content })),
+      modules: (it.modules || []).map(m => ({
+        id: m.id,
+        title: m.title,
+        slug: m.slug,
+        content: m.content,
+        audio: m.audio || null,
+        audioUrl: m.audio ? `${baseUrl}/assets/${m.audio}` : null
+      })),
       createdAt: it.createdAt
     };
     res.json(mapped);
