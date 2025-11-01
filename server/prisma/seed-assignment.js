@@ -24,15 +24,6 @@ async function main() {
       }
     ]
   });
-
-  await prisma.exerciseRecommendation.createMany({
-    data: [
-      { code: 'akademik', title: 'Latihan napas sebelum belajar', slug: 'latihan-napas-belajar' },
-      { code: 'sosial', title: 'Latihan self-compassion 3 menit', slug: 'self-compassion-3m' },
-      { code: 'keluarga', title: 'Journaling untuk konflik keluarga', slug: 'journaling-keluarga' },
-      { code: 'diri', title: 'Mindfulness overthinking', slug: 'mindfulness-overthinking' }
-    ]
-  });
 }
 
 main()
